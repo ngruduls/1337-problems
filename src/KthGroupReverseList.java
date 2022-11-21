@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-
 class KthGroupReverseList {
     /**
      * Definition for singly-linked list. */
@@ -22,22 +18,22 @@ class KthGroupReverseList {
           }
       }
 
-    public ListNode reverseKGroup1(ListNode head, int k) {
-          ListNode cur = head;
+    public ListNode reverseKGroupRecurse(ListNode head, int k) {
+          ListNode curr = head;
           int count = 0;
-          while (cur != null && count != k) {
-              cur = cur.next;
+          while (curr != null && count != k) {
+              curr = curr.next;
               count++;
           }
           if (count == k) {
-              cur = reverseKGroup1(cur, k);
+              curr = reverseKGroupRecurse(curr, k);
               while (count-- > 0) {
                   ListNode temp = head.next;
-                  head.next = cur;
-                  cur = head;
+                  head.next = curr;
+                  curr = head;
                   head = temp;
               }
-              head = cur;
+              head = curr;
           }
           return head;
     }
@@ -58,10 +54,10 @@ class KthGroupReverseList {
               } else {
                   groupPrev = curr;
                   curr = curr.next;
-                  ListNode end = curr;
+                  ListNode reachEnd = curr;
                   for (int i = 0; i < k; i++) {
-                      if (end == null) return dummyStart.next;
-                      end = end.next;
+                      if (reachEnd == null) return dummyStart.next;
+                      reachEnd = reachEnd.next;
                   }
                   count = k;
               }
@@ -72,15 +68,17 @@ class KthGroupReverseList {
 
     public static void main (String[] args) {
         KthGroupReverseList a1 = new KthGroupReverseList();
+        ListNode temp;
 
         ListNode l1 = new ListNode(1);
         l1.next = new ListNode(2);
         l1.next.next = new ListNode(3);
         l1.next.next.next = new ListNode(4);
-        l1.next.next.next.next = new ListNode(5);
+        temp = l1.next.next.next.next = new ListNode(5);
+        temp.next = new ListNode(6);
 
-        //a1.reverseKGroup1(l1,2);
-        ListNode rez = a1.reverseKGroup2(l1,2);
+        ListNode rez = a1.reverseKGroupRecurse(l1,2);
+        //ListNode rez = a1.reverseKGroup2(l1,3);
         a1.printList(rez);
 
     }
