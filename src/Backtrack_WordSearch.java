@@ -2,9 +2,9 @@ public class Backtrack_WordSearch {
     public boolean exist(char[][] board, String word) {
         int rows = board.length;
         int cols = board[0].length;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (check(board,word, i, j, rows, cols, 0)) {
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (check(board,word, row, col, rows, cols, 0)) {
                     return true;
                 }
             }
