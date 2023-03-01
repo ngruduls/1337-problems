@@ -27,9 +27,31 @@ public class Dynamic1D_LongestPalindrome {
         return s.substring(left,right);
     }
 
+    public int countSubstrings(String s) {
+        if (s.length() < 2) {
+            return s.length();
+        }
+        int result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            //odd
+            int left = i, right = i;
+            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                result ++ ;
+                left--; right ++;
+            }
+            left = i; right = i+1;
+            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                result++;
+                left--; right++;
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         Dynamic1D_LongestPalindrome a1 = new Dynamic1D_LongestPalindrome();
-        System.out.println(a1.longestPalindrome("bananas"));
+        //System.out.println(a1.longestPalindrome("bananas"));
         System.out.println("nauris".substring(0,3));
+        System.out.println(a1.countSubstrings("ana"));
     }
 }
