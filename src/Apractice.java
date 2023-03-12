@@ -1,5 +1,5 @@
 public class Apractice {
-    public int[] replaceElements(int[] arr) {
+    public int[] replaceElements2(int[] arr) {
         int maxSoFar = arr[arr.length - 1];
         int[] rez = new int[arr.length];
         rez [arr.length - 1] = -1;
@@ -9,6 +9,16 @@ public class Apractice {
             rez[i-1] =  maxSoFar;
         }
         return rez;
+    }
+
+    public int[] replaceElements(int[] arr) {
+        int rightMax = -1;
+        for (int i = arr.length - 1; i >= 0; i--) {
+            int newMax = Math.max(rightMax, arr[i]);
+            arr[i] = rightMax;
+            rightMax = newMax;
+        }
+        return arr;
     }
 
     public static void main(String[] args) {
