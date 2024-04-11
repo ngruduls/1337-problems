@@ -9,12 +9,12 @@ public class JumpGame {
         Arrays.fill(minJumps, Integer.MAX_VALUE);
         minJumps[0] = 0;  // Starting point
 
-        for (int i = 0; i < n; i++) {
+        for (int position = 0; position < n; position++) {
             // Not necessary to consider if this point is unreachable.
-            if (minJumps[i] == Integer.MAX_VALUE) continue;
+            if (minJumps[position] == Integer.MAX_VALUE) continue;
 
-            for (int j = i + 1; j <= i + nums[i] && j < n; j++) {
-                minJumps[j] = Math.min(minJumps[j], minJumps[i] + 1);
+            for (int nextPosition = position + 1; nextPosition <= position + nums[position] && nextPosition < n; nextPosition++) {
+                minJumps[nextPosition] = Math.min(minJumps[nextPosition], minJumps[position] + 1);
             }
         }
 
